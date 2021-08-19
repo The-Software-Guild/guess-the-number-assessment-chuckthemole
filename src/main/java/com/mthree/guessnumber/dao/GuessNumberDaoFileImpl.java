@@ -1,0 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mthree.guessnumber.dao;
+
+import com.mthree.guessnumber.model.RandomFourDigitNumber;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *
+ * @author Chuck
+ */
+public class GuessNumberDaoFileImpl implements GuessNumberDao {
+    private Map<Integer, RandomFourDigitNumber> randomFourDigitNumberList;
+        
+    public GuessNumberDaoFileImpl() {
+        randomFourDigitNumberList = new HashMap();
+    }
+    
+    @Override
+    public Integer createRandomFourDigitNumber() {
+        RandomFourDigitNumber number;
+        while (true) {
+            number = new RandomFourDigitNumber();
+            if (!randomFourDigitNumberList.containsKey(number.getNumber())) {
+                randomFourDigitNumberList.put(number.getNumber(), number);
+                break;
+            }
+        }
+        return number.getNumber();
+    }   
+
+    @Override
+    public List<RandomFourDigitNumber> getNumbers() {
+        List<RandomFourDigitNumber> list = new ArrayList();
+        list.addAll(randomFourDigitNumberList.values());
+        return list;
+    } 
+}
