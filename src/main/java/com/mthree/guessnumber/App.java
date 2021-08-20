@@ -17,14 +17,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
 
 @SpringBootApplication
-public class App implements CommandLineRunner {
+public class App { //implements CommandLineRunner {
     @Autowired
     private JdbcTemplate jdbc;
 
     public static void main(String[] args) {
             SpringApplication.run(App.class, args);
     }
-
+    /*
     @Override
     public void run(String... args) throws Exception {
         ApplicationContext ctx = 
@@ -32,5 +32,5 @@ public class App implements CommandLineRunner {
         GuessNumberController controller = 
                 ctx.getBean("controller", GuessNumberController.class);
         controller.run();
-    }
+    }*/
 }

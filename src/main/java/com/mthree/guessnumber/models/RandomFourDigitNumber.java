@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mthree.guessnumber.model;
+package com.mthree.guessnumber.models;
 
 import java.util.ArrayList;
 import java.util.Collections;

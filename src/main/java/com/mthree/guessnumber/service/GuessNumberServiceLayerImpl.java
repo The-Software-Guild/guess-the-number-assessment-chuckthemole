@@ -5,15 +5,18 @@
  */
 package com.mthree.guessnumber.service;
 
-import com.mthree.guessnumber.dao.GuessNumberDao;
-import com.mthree.guessnumber.model.RandomFourDigitNumber;
+import com.mthree.guessnumber.data.GuessNumberDao;
+import com.mthree.guessnumber.models.RandomFourDigitNumber;
 import java.util.List;
 import java.util.Map;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Chuck
  */
+
+@Configuration
 public class GuessNumberServiceLayerImpl implements GuessNumberServiceLayer {
     GuessNumberDao dao;
 

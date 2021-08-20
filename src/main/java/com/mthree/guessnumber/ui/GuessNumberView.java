@@ -8,11 +8,14 @@ package com.mthree.guessnumber.ui;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Chuck
  */
+
+@Configuration
 public class GuessNumberView {
     private UserIO io;
     

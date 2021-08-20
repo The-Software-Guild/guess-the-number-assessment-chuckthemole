@@ -5,7 +5,7 @@
  */
 package com.mthree.guessnumber.service;
 
-import com.mthree.guessnumber.model.RandomFourDigitNumber;
+import com.mthree.guessnumber.models.RandomFourDigitNumber;
 import java.util.List;
 import java.util.Map;
 
