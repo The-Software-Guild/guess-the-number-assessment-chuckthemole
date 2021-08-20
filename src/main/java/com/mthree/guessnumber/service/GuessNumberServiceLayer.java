@@ -5,7 +5,9 @@
  */
 package com.mthree.guessnumber.service;
 
+import com.mthree.guessnumber.models.Game;
 import com.mthree.guessnumber.models.RandomFourDigitNumber;
+import com.mthree.guessnumber.models.Round;
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +18,10 @@ import java.util.Map;
 public interface GuessNumberServiceLayer {
     Integer createRandomFourDigitNumber();
     List<RandomFourDigitNumber> getNumbers();
+    Round guessNumber(int guess, int gameID);
+    Map<Integer, Game> getGames();
+    Integer retrieveHiddenNumber(int gameID);
+    Integer getNumber(int gameID);
+    Game getGame(int id);
+    List<Round> getRounds(int gameID);
 }

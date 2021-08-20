@@ -5,14 +5,20 @@
  */
 package com.mthree.guessnumber.controller;
 
+import com.mthree.guessnumber.models.Game;
 import com.mthree.guessnumber.models.RandomFourDigitNumber;
+import com.mthree.guessnumber.models.Round;
 import com.mthree.guessnumber.service.GuessNumberServiceLayer;
 import com.mthree.guessnumber.ui.GuessNumberView;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,18 +77,30 @@ public class GuessNumberController {
         return view.printMenuAndGetSelection();
     }
     
-    @PostMapping("/create")
+    @PostMapping("/begin")
     @ResponseStatus(HttpStatus.CREATED)
     private Integer createRandomFourDigitNumber() {
-        Integer number = service.createRandomFourDigitNumber();
-        if (number == null) {
+        Integer gameID = service.createRandomFourDigitNumber();
+        if (gameID == null) {
             view.displayNumberCreatedUnsuccessfulBanner();
         } else {
             view.displayNumberCreatedSuccessfulBanner();
-            view.displayNumberCreated(number);
+            view.print("ID=" + gameID);
+            view.displayNumberCreated(service.retrieveHiddenNumber(gameID));
         }
         
-        return number;
+        return gameID;
+    }
+    
+    @PostMapping("/guess")
+    private ResponseEntity<Round> guess(int guess, int gameID) {
+        Round round = service.guessNumber(guess, gameID);
+        
+        if (round == null) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(round);
+        
     }
     
     @GetMapping("/getallnumbers")
@@ -95,6 +113,26 @@ public class GuessNumberController {
         view.displayNumbers(list);
         
         return list;
+    }
+    
+    @GetMapping("/getgames")
+    private ResponseEntity<List<Game>> getGames() {
+        List<Game> games = new ArrayList<>();
+        games.addAll(service.getGames().values());
+        
+        if (games.size() < 1) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(games);
+    }
+    
+    @GetMapping("/game/{id}")
+    private ResponseEntity<Game> findByID(@PathVariable int id) {
+        Game game = service.getGame(id);
+        if (game == null) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(game);
     }
     
     private void guessNumber() {
@@ -111,6 +149,16 @@ public class GuessNumberController {
         } else {
             view.displayGuessNumberNoNumbersCreatedBanner();
         }
+    }
+    
+    @GetMapping("/rounds/{id}")
+    private ResponseEntity<List<Round>> findRoundsByGameID(@PathVariable int id) {
+        List<Round> rounds = service.getRounds(id);
+
+        if (rounds.size() < 1) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(rounds);
     }
     
     private void playGame(int number) {

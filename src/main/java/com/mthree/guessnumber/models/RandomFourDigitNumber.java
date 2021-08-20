@@ -7,6 +7,10 @@ package com.mthree.guessnumber.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -14,6 +18,7 @@ import java.util.Collections;
  */
 public class RandomFourDigitNumber {
     private Integer number;
+    private static final int HIDDEN_NUMBER = -1;
     
     public RandomFourDigitNumber() {
         ArrayList<Integer> listOfDigits = new ArrayList<Integer>();
@@ -37,7 +42,52 @@ public class RandomFourDigitNumber {
         number += (listOfDigits.get(0) * 100);  
     }   
     
+    private RandomFourDigitNumber(Integer number) {
+        this.number = number;
+    }   
+    
+    public static RandomFourDigitNumber createHiddenNumber() {
+        return new RandomFourDigitNumber(HIDDEN_NUMBER);
+    }
+    
     public Integer getNumber() {
         return number;
     }
+    
+    public String compareNumbers(Integer number) {
+        Map<Integer, Integer> hiddenDigitAndPlace = new HashMap(); 
+        int numberOfExactMatches = 0;
+        int numberOfPartialMatches = 0;
+        
+        int digit;
+        int temp = this.number;
+        for (int i = 1; i < 5; i++) {
+            digit = temp % 10;
+            temp /= 10;     
+            hiddenDigitAndPlace.put(digit, i);
+        }
+
+        temp = number;
+        for (int i = 1; i < 5; i++) {
+            digit = temp % 10;
+            temp /= 10;     
+            
+            if (hiddenDigitAndPlace.containsKey(digit)) {
+                if (hiddenDigitAndPlace.get(digit) == i) {
+                    numberOfExactMatches++;
+                } else {
+                    numberOfPartialMatches++;
+                }
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("e:")
+                .append(numberOfExactMatches)
+                .append(":p:")
+                .append(numberOfPartialMatches);
+
+        return sb.toString();
+    }
+        
 }
