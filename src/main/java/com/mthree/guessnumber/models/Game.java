@@ -5,22 +5,24 @@
  */
 package com.mthree.guessnumber.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  *
  * @author Chuck
  */
 public class Game {
     private boolean isActive;
-    private final int gameID;
+    private int gameID;
     private static int gameCount;
-    private final RandomFourDigitNumber number;
+    private RandomFourDigitNumber number;
     private final RandomFourDigitNumber HIDDEN_NUMBER = 
             RandomFourDigitNumber.createHiddenNumber();
     
     static {
         gameCount = 0;
+    }
+    
+    public Game() {
+        this.number = new RandomFourDigitNumber(-1);
     }
     
     public Game(RandomFourDigitNumber number) {
@@ -34,8 +36,16 @@ public class Game {
         return this.isActive;
     }
     
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
     public int getGameID() {
         return this.gameID;
+    }
+    
+    public void setID(int id) {
+        this.gameID = id;
     }
     
     public int getNumberOfGames() {
@@ -53,11 +63,11 @@ public class Game {
         return this.number;
     }
     
-    public void gameOver() {
-        setIsActive(false);
+    public void setNumber(Integer number) {
+        this.number.setNumber(number);
     }
     
-    private void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void gameOver() {
+        setIsActive(false);
     }
 }

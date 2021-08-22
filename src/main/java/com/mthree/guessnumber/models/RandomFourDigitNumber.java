@@ -8,9 +8,7 @@ package com.mthree.guessnumber.models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *
@@ -18,6 +16,7 @@ import java.util.Set;
  */
 public class RandomFourDigitNumber {
     private Integer number;
+    private int numberID;
     private static final int HIDDEN_NUMBER = -1;
     
     public RandomFourDigitNumber() {
@@ -42,7 +41,7 @@ public class RandomFourDigitNumber {
         number += (listOfDigits.get(0) * 100);  
     }   
     
-    private RandomFourDigitNumber(Integer number) {
+    public RandomFourDigitNumber(Integer number) {
         this.number = number;
     }   
     
@@ -52,6 +51,18 @@ public class RandomFourDigitNumber {
     
     public Integer getNumber() {
         return number;
+    }
+    
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+    
+    public void setID(Integer id) {
+        this.numberID = id;
+    }
+    
+    public int getID() {
+        return this.numberID;
     }
     
     public String compareNumbers(Integer number) {

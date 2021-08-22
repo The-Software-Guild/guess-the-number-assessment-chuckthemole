@@ -6,21 +6,17 @@
 package com.mthree.guessnumber.controller;
 
 import com.mthree.guessnumber.models.Game;
-import com.mthree.guessnumber.models.RandomFourDigitNumber;
 import com.mthree.guessnumber.models.Round;
 import com.mthree.guessnumber.service.GuessNumberServiceLayer;
 import com.mthree.guessnumber.ui.GuessNumberView;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -118,7 +114,7 @@ public class GuessNumberController {
     @GetMapping("/getgames")
     private ResponseEntity<List<Game>> getGames() {
         List<Game> games = new ArrayList<>();
-        games.addAll(service.getGames().values());
+        games.addAll(service.getGames());
         
         if (games.size() < 1) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);

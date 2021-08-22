@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
+@Profile("memory")
 public class GuessNumberDaoFileImpl implements GuessNumberDao {
     private Map<Integer, RandomFourDigitNumber> randomFourDigitNumberList;
     private Map<Integer, Game> games;
@@ -58,8 +60,10 @@ public class GuessNumberDaoFileImpl implements GuessNumberDao {
     } 
     
     @Override
-    public Map<Integer, Game> getGames() {
-        return games;
+    public List<Game> getGames() {
+        List<Game> allGames = new ArrayList<>();
+        allGames.addAll(games.values());
+        return allGames;
     } 
 
     @Override

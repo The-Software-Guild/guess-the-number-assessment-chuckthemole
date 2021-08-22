@@ -19,7 +19,7 @@ public interface GuessNumberDao {
     Integer createRandomFourDigitNumber();
     List<RandomFourDigitNumber> getNumbers();
     Round guessNumber(Integer number, int gameID);
-    Map<Integer, Game> getGames();
+    List<Game> getGames();
     Integer retrieveHiddenNumber(int gameID);
     Integer getNumber(int gameID);
     Game getGame(int id);

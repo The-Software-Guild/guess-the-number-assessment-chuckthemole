@@ -19,7 +19,7 @@ public interface GuessNumberServiceLayer {
     Integer createRandomFourDigitNumber();
     List<RandomFourDigitNumber> getNumbers();
     Round guessNumber(int guess, int gameID);
-    Map<Integer, Game> getGames();
+    List<Game> getGames();
     Integer retrieveHiddenNumber(int gameID);
     Integer getNumber(int gameID);
     Game getGame(int id);

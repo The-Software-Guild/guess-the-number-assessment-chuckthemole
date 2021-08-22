@@ -42,7 +42,7 @@ public class GuessNumberServiceLayerImpl implements GuessNumberServiceLayer {
     }
 
     @Override
-    public Map<Integer, Game> getGames() {
+    public List<Game> getGames() {
         return dao.getGames();
     }
 
