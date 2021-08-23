@@ -12,10 +12,18 @@ import java.time.LocalDate;
  * @author Chuck
  */
 public class Round {
-    private final int guess;
-    private final LocalDate time;
-    private final String result;
-    private final Game game;
+    private int id;
+    private int guess;
+    private LocalDate time;
+    private String result;
+    private Game game;
+    
+    public Round() {
+        this.guess = -1;
+        this.time = null;
+        this.result = null;
+        this.game = null;
+    }
     
     public Round(int guess, Game game) {
         this.guess = guess;
@@ -28,16 +36,36 @@ public class Round {
         return guess;
     }
     
+    public void setGuess(int guess) {
+        this.guess = guess;
+    }
+    
     public LocalDate getTime() {
         return time;
+    }
+    
+    public void setTime(LocalDate time) {
+        this.time = time;
     }
     
     public String getResult() {
         return result;
     }
     
+    public void setResult(String result) {
+        this.result = result;
+    }
+    
     public Game getGame() {
         return game;
+    }
+    
+    public void setGame(Game game) {
+        this.game = game;
+    }
+    
+    public void setID(int id) {
+        this.id = id;
     }
     
     @Override

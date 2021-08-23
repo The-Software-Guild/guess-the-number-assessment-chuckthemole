@@ -12,23 +12,19 @@ package com.mthree.guessnumber.models;
 public class Game {
     private boolean isActive;
     private int gameID;
-    private static int gameCount;
+    //private static int gameCount;
     private RandomFourDigitNumber number;
     private final RandomFourDigitNumber HIDDEN_NUMBER = 
             RandomFourDigitNumber.createHiddenNumber();
     
-    static {
-        gameCount = 0;
-    }
-    
     public Game() {
-        this.number = new RandomFourDigitNumber(-1);
+        //this.number = new RandomFourDigitNumber(-1);
     }
     
     public Game(RandomFourDigitNumber number) {
         this.isActive = true;
-        Game.gameCount++;
-        this.gameID = gameCount;
+        // Game.gameCount++;
+        // this.gameID = gameCount;
         this.number = number;
     }
     
@@ -48,10 +44,6 @@ public class Game {
         this.gameID = id;
     }
     
-    public int getNumberOfGames() {
-        return Game.gameCount;
-    }
-    
     public RandomFourDigitNumber getNumber() {
         if (this.isActive) {
             return HIDDEN_NUMBER;
@@ -65,6 +57,10 @@ public class Game {
     
     public void setNumber(Integer number) {
         this.number.setNumber(number);
+    }
+    
+    public void setNumber(RandomFourDigitNumber number) {
+        this.number = number;
     }
     
     public void gameOver() {
